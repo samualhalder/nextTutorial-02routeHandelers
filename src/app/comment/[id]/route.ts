@@ -1,5 +1,6 @@
 import { json } from 'stream/consumers';
 import {commentData} from '../data'
+import { redirect } from 'next/navigation';
 export async function GET(req:Request,{params}:{
     params:{
         id:string,
@@ -8,6 +9,7 @@ export async function GET(req:Request,{params}:{
     const id=parseInt(params.id)
     const comment=commentData.find((com)=>com.id===parseInt(params.id))
     if(!comment){
+        redirect('/comment')
         return new Response("No such comments",{
             headers:{
                 "Content-Type":'application/json'
